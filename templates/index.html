@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Index{% endblock %}
+{% block head %}
+<link href="{{ url_for('static', filename='index.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<body>
+    <div id="container">
+        <h1>BOOK</h1>
+        <h4>당신을 위한 여섯 권의📚</h4>
+
+        <form id="user-form" method="POST" onsubmit="return checkForm();">
+            <div>
+                <label for="user_name">이름</label>
+                <input type="text" name="user_name" id="user_name"/>
+                <div class="invalid-feedback">
+                    <p>이름 또는 닉네임을 입력해주세요</p>
+                </div>
+            </div>
+            <div>
+                <label for="user_age">나이</label>
+                <input type="text" name="user_age" id="user_age"/>
+                <div class="invalid-feedback">
+                    <p>나이를 숫자로 입력해주세요</p>
+                </div>
+            </div>
+            <div>
+                <label for="user_gender">성별</label>
+                <select name="user_gender">
+                    <option value="여성">여성</option>
+                    <option value="남성">남성</option>
+                  </select>
+                <div class="invalid-feedback">
+                    <p>성별을 입력해주세요</p>
+                </div>
+            </div>
+            <div>
+                <label for="book_title">좋아하는 책</label>
+                <input type="text" name="book_title" id="book_title"/>
+                <div class="invalid-feedback">
+                    <p>맞춤법과 띄어쓰기를 주의해주세요!</p>
+                </div>
+            </div>
+            <button type="submit">내 취향 책 추천받기😋</button>
+        </form>
+    </div>
+
+    <!-- 찾는 도서가 없는 경우 -->
+    {%with messages = get_flashed_messages()%}
+        {%if messages %}
+            <script type="text/javascript">
+                alert("{{messages[-1]}}");
+            </script>
+        {%endif%}
+    {%endwith%}
+
+    <script>
+        function checkForm() {
+            var user_name = document.getElementById('user_name');
+            var user_age = document.getElementById('user_age');
+            var book_title = document.getElementById('book_title');
+
+            // 이름 입력 유무 체크
+            if (user_name.value == '') {
+                alert("이름 또는 닉네임을 입력해주세요!");
+                user_name.focus();
+                return false;
+            }
+
+            // 나이 입력 유무 체크
+            if (user_age.value == '' || isNaN(user_age.value)) {
+                alert("나이를 숫자로 입력해주세요!");
+                user_age.focus();
+                return false;
+            }
+
+            // 책 제목 입력 유무 체크
+            if (book_title.value == ''){
+                alert("책 제목을 입력해주세요!");
+                book_title.focus();
+                return false;
+            }
+        }
+    </script>
+</body>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Result{% endblock %}
+{% block head %}
+<link href="{{ url_for('static', filename='result.css')}}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<body>
+    <div id="container">
+        <p>{{user.title}}을 재밌게 읽으신 {{user.name}}님,</p>
+        <div>
+            <img src="{{user.cover}}"/>
+        </div>
+        <p>{{user.name}}님이 좋아할 만한 책이에요🥰</p>
+
+        <div id="grid-container">
+            {% for book in book_list %}
+            <div class="book-item">
+                <div class="book-img">
+                    <img id="img-cover" src="{{ book[0] }}"/>
+                </div>
+                <hr>
+                <div class="book-title">
+                    <p>{{ book[1] }}</p>
+                </div>
+                <div class="book-info">
+                    <p>{{ book[2] }} | {{ book[3] }}</p>
+                </div>
+                <a href=" {{ book[4] }}" target='_blank'><button>책 보러가기👆</button></a>
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div id="email-container">
+            <a href="mailto:ldonghae320@gmail.com"><button>개발자에게 피드백 보내기👩‍💻</button></a>
+        </div>
+    </div>
+</body>
+{% endblock %}

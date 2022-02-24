@@ -1,0 +1,101 @@
+@font-face {
+    font-family: 'NanumSquareRound';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'NanumSquareRound';
+    min-width: 300px;
+}
+
+#container{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    min-height: 100vh;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+#grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+h1, h3 {
+    color: #e63946;
+}
+
+h1 {
+    margin: 0;
+    font-size: 55px;
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #f5f3f4;
+}
+
+.book-item {
+    border: 2px solid #f5f3f4;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+#img-cover {
+    width: 100px;
+    object-fit: cover;
+}
+
+.book-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.book-title {
+    height: 50px;
+    font-size: 14px;
+}
+
+.book-title > p {
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.book-info {
+    height: 30px;
+    font-size: 12px;
+}
+
+.book-info > p{
+    margin: 0;
+    font-weight: 600;
+}
+
+.book-item > a > button, #email-container > a > button {
+    padding: 5px;
+    margin-top: 3px;
+    border-radius: 10px;
+    background-color: #e63946;
+    border: 2px solid #e63946;
+    font-size: 12px;
+    font-weight: 500;
+    color: white;
+    font-family: 'NanumSquareRound';
+}
+
+#email-container {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
