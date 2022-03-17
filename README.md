@@ -28,5 +28,6 @@
 - 입력된 사용자 데이터는 DB에 저장되도록 구현 
 - 파이썬 웹 프레임워크 Flask를 사용해 웹 앱 개발 및 Heroku를 사용해 배포
 
+[당신을 위한 여섯 권의 📚 확인하기](http://sixbooks.herokuapp.com/)
 
 ![image](https://user-images.githubusercontent.com/53463067/158841263-1bedf1a9-cf23-4944-8ca3-29be4a078c49.png)
