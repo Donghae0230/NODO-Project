@@ -76,6 +76,13 @@
                 return false;
             }
 
+            // 나이 범위 체크
+            if (user_age.value < 0 || user_age.value > 100) {
+                alert("나이를 정확히 입력해주세요!")
+                user_age.focus();
+                return false;
+            }
+
             // 책 제목 입력 유무 체크
             if (book_title.value == ''){
                 alert("책 제목을 입력해주세요!");
