@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, request, flash
 import psycopg2
 import pickle
 import pandas as pd
+from datetime import datetime
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
@@ -22,7 +23,8 @@ def index():
         user_age = request.form.get('user_age')
         user_gender = request.form.get('user_gender')
         book_title = request.form.get('book_title')
-        
+        current_time = datetime.now()
+
         cur = conn.cursor()
         
         # 키워드로 제목 검색
@@ -41,9 +43,9 @@ def index():
             return render_template('index.html')
         
         # 사용자 정보 DB에 저장
-        sql_insert = f"""INSERT INTO users (name, age, gender, isbn) 
+        sql_insert = f"""INSERT INTO users (name, age, gender, isbn, tiem) 
                         VALUES (%s, %s, %s, %s)"""
-        cur.execute(sql_insert, (user_name, user_age, user_gender, book_isbn))
+        cur.execute(sql_insert, (user_name, user_age, user_gender, book_isbn, current_time))
         conn.commit()
                 
         # 추천 도서 검색
