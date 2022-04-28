@@ -3,6 +3,8 @@ from flask import Blueprint, render_template, request, flash
 import psycopg2
 import pickle
 import pandas as pd
+import requests
+import json
 from datetime import datetime
 
 bp = Blueprint('main', __name__, url_prefix='/')
@@ -13,6 +15,21 @@ conn = psycopg2.connect(
     database="bwvmpjyr",
     user="bwvmpjyr",
     password="p1K37MwTlB6-9XNHgrGnIzZ-As7xc0iQ")
+
+def get_bookdata(title):
+    TTB_KEY = 'ttbldonghae981628001'
+    params = {
+                'ttbkey':TTB_KEY,
+                'MaxResults':'1',
+                'SearchTarget':'Book',
+                'output':'JS',
+                'Version':'20131101'
+            }
+    API_URL = f'https://www.aladin.co.kr/ttb/api/ItemSearch.aspx?Query={title}'
+    raw_data = requests.get(API_URL, params=params)
+    parsed_data = json.loads(raw_data.text, strict=False)
+    isbn = parsed_data['item'][0]['isbn13']
+    return isbn
 
 @bp.route('/', methods=('GET', 'POST'))
 def index():
@@ -27,24 +44,26 @@ def index():
 
         cur = conn.cursor()
         
-        # 키워드로 제목 검색
+        # 사용자 입력 도서 검색
+        book_isbn = get_bookdata(book_title)
         book_title = '%' + book_title + '%'
-        sql_isbn = f'SELECT title, isbn, cover FROM books WHERE title LIKE \'{book_title}\''
+
+        sql_isbn = f'SELECT title, isbn, cover FROM books WHERE isbn = \'{book_isbn}\''
         cur.execute(sql_isbn)
-        book = cur.fetchone()
+        book_info = cur.fetchone()
         
         # 사용자가 검색한 도서정보 저장
         try:
-            book_title = book[0]
-            book_isbn = book[1]
-            book_cover = book[2]
+            book_title = book_info[0]
+            book_isbn = book_info[1]
+            book_cover = book_info[2]
         except TypeError:
             flash('해당 도서는 준비중입니다')
             return render_template('index.html')
         
         # 사용자 정보 DB에 저장
-        sql_insert = f"""INSERT INTO users (name, age, gender, isbn, tiem) 
-                        VALUES (%s, %s, %s, %s)"""
+        sql_insert = f"""INSERT INTO users (name, age, gender, isbn, time) 
+                        VALUES (%s, %s, %s, %s, %s)"""
         cur.execute(sql_insert, (user_name, user_age, user_gender, book_isbn, current_time))
         conn.commit()
                 
