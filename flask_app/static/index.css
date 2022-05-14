@@ -18,8 +18,8 @@ body {
     flex-direction: column;
 }
 
-h1, h4, label {
-    color: #e63946;
+h1, h5, label {
+    color: #0AA1DD;
 }
 
 h1 {
@@ -27,9 +27,10 @@ h1 {
     font-size: 60px;
 }
 
-h4 {
+h5 {
     margin-top: 0;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 p {
@@ -47,7 +48,7 @@ input, select {
     border-radius: 40px;
     margin-top: 5px;
     padding: 5px;
-    border: 2px solid #e63946;
+    border: 2px solid #0AA1DD;
 }
 
 input {
@@ -60,11 +61,11 @@ select {
 
 textarea:focus, input:focus {
     outline: none;
-    border: 2px solid #e63946;
+    border: 2px solid #0AA1DD;
 }
 
 input:invalid {
-    background-color: #e63946;
+    background-color: #0AA1DD;
 }
   
 button {
@@ -72,8 +73,8 @@ button {
     margin-top: 12px;
     padding: 5px;
     border-radius: 40px;
-    background-color: #e63946;
-    border: 2px solid #e63946;
+    background-color: #0AA1DD;
+    border: 2px solid #0AA1DD;
     font-size: 13px;
     font-weight: 500;
     color: white;

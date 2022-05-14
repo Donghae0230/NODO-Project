@@ -25,7 +25,7 @@ body {
 }
 
 h1, h3 {
-    color: #e63946;
+    color: #0AA1DD;
 }
 
 h1 {
@@ -85,8 +85,8 @@ hr {
     padding: 5px;
     margin-top: 3px;
     border-radius: 10px;
-    background-color: #e63946;
-    border: 2px solid #e63946;
+    background-color: #0AA1DD;
+    border: 2px solid #0AA1DD;
     font-size: 12px;
     font-weight: 500;
     color: white;

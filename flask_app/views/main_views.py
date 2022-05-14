@@ -6,6 +6,7 @@ import pandas as pd
 import requests
 import json
 from datetime import datetime
+from pathlib import Path
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
@@ -46,12 +47,11 @@ def index():
         
         # 사용자 입력 도서 검색
         book_isbn = get_bookdata(book_title)
-        book_title = '%' + book_title + '%'
 
         sql_isbn = f'SELECT title, isbn, cover FROM books WHERE isbn = \'{book_isbn}\''
         cur.execute(sql_isbn)
         book_info = cur.fetchone()
-        
+
         # 사용자가 검색한 도서정보 저장
         try:
             book_title = book_info[0]
@@ -80,12 +80,12 @@ def index():
                 'cover': book_cover}
         return render_template('result.html', user=user, book_list=book_list)
 
-with open("book_app\data.pickle","rb") as fr:
+with open(Path('flask_app/cos_sim.pickle'),'rb') as fr:
     data = pickle.load(fr)
 
 # 유사한 도서 5권의 TSBN을 반환하는 함수
 def recommendation(ISBN):
-    indices = pd.read_csv('book_app\indices.csv', 
+    indices = pd.read_csv(Path('flask_app/indices.csv'), 
                           index_col=0,
                           squeeze=True)     # 인덱스를 활용하기 위해 Series 형태로 불러오기
     idx = indices[indices==ISBN].index[0]
